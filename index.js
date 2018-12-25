@@ -86,16 +86,16 @@ class CountDown extends React.Component {
   updateTimer = () => {
     const {until} = this.state;
 
-    if (until <= 1) {
-      clearInterval(this.timer);
-      this.timer = null;
-      this.setState({until: 0});
-      if (this.onFinish) {
-        this.onFinish();
-      }
+    if ((this.props.countup != undefined) && (this.props.countup == true)) {
+      this.setState({until: until + 1});
     } else {
-      if ((this.props.countup != undefined) && (this.props.countup == true)) {
-        this.setState({until: until + 1});
+      if (until <= 1) {
+        clearInterval(this.timer);
+        this.timer = null;
+        this.setState({until: 0});
+        if (this.onFinish) {
+          this.onFinish();
+        }
       } else {
         this.setState({until: until - 1});
       }
