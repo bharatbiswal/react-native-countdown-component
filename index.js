@@ -61,6 +61,9 @@ class CountDown extends React.Component {
   _handleAppStateChange = currentAppState => {
     const {until, wentBackgroundAt} = this.state;
     if (currentAppState === 'active' && wentBackgroundAt) {
+      if ((this.props.paused != undefined) && (this.props.paused == true)) {
+        return;
+      }
       const diff = (Date.now() - wentBackgroundAt) / 1000.0;
       if ((this.props.countup != undefined) && (this.props.countup == true)) {
         this.setState({until: Math.max(0, until + diff)});
@@ -85,6 +88,9 @@ class CountDown extends React.Component {
 
   updateTimer = () => {
     const {until} = this.state;
+    if ((this.props.paused != undefined) && (this.props.paused == true)) {
+      return;
+    }
 
     if ((this.props.countup != undefined) && (this.props.countup == true)) {
       this.setState({until: until + 1});
